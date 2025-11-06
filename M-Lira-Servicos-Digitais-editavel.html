@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>M. Lira — Serviços Digitais (Editável)</title>
+  <meta name="description" content="M. Lira Serviços Digitais LTDA — site editável localmente." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#041526;
+      --card:#07293a;
+      --accent:#00a3ff;
+      --muted:#9fb8c7;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,var(--bg),#072735 120%); color:#e6f3fb}
+    .container{max-width:1100px;margin:0 auto;padding:36px;position:relative;z-index:2}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#063b57,var(--accent));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,0.6);font-weight:800;font-size:28px;cursor:default}
+    .brand h1{margin:0;font-size:20px;letter-spacing:0.6px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600;cursor:pointer}
+    nav a.cta{background:linear-gradient(90deg,var(--accent),#00d0ff);color:#022; padding:10px 14px;border-radius:10px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-top:40px}
+    .hero-left h2{font-size:40px;margin:0 0 12px}
+    .hero-left p{margin:0 0 20px;color:var(--muted);line-height:1.6}
+    .buttons{display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#00d0ff);color:#012;box-shadow:0 8px 30px rgba(0,163,255,0.12)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:20px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(2,12,18,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .features{display:flex;gap:14px;margin-top:28px}
+    .feature{flex:1;padding:18px;border-radius:12px;background:var(--glass);backdrop-filter:blur(6px)}
+    .feature h4{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .thumb{height:120px;border-radius:12px;background:linear-gradient(120deg,#063b57,#033a4b);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.85);font-weight:700;cursor:default}
+    footer{margin-top:48px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center}
+    .contact{display:flex;flex-direction:column;gap:10px}
+    label{font-size:13px;color:var(--muted)}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit}
+    textarea{min-height:110px}
+    .whatsapp{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:10px 14px;border-radius:10px;background:#075e3f;font-weight:700}
+    @media (max-width:980px){.hero{grid-template-columns:1fr;}.portfolio{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.portfolio{grid-template-columns:1fr}.logo{width:56px;height:56px;font-size:22px}}
+    .bg-lines{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.18;background-image:linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:120px 120px}
+    /* edit panel */
+    .edit-toggle{position:fixed;right:18px;top:18px;z-index:40}
+    .edit-toggle button{background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 12px;border-radius:10px;cursor:pointer}
+    .editor-panel{position:fixed;right:18px;top:64px;width:320px;background:linear-gradient(180deg,rgba(2,12,18,0.9),rgba(2,12,18,0.8));border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:12px;z-index:41;display:none}
+    .editor-panel h4{margin:0 0 8px}
+    .editor-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .editor-row label{min-width:80px;color:var(--muted);font-size:13px}
+    .editor-controls input[type="color"]{width:44px;height:36px;border-radius:8px;border:0;padding:0;background:#fff}
+    .editor-actions{display:flex;gap:8px;margin-top:10px}
+    .small{font-size:13px;padding:8px 10px;border-radius:8px}
+    .save-info{color:var(--muted);font-size:13px;margin-top:8px}
+    .editable-indicator{display:inline-block;margin-left:8px;font-size:12px;color:var(--muted)}    
+  </style>
+</head>
+<body>
+  <div class='bg-lines' aria-hidden='true'></div>
+  <div class='container' id='site-root'>
+    <header>
+      <div class='brand'>
+        <div class='logo' data-editable-id='logo_text'>M</div>
+        <div>
+          <h1 data-editable-id='company_name'>M. Lira Serviços Digitais LTDA</h1>
+          <p data-editable-id='company_tagline'>Soluções digitais profissionais — web, automações e marketing</p>
+        </div>
+      </div>
+      <nav>
+        <a href='#servicos' data-scroll>Serviços</a>
+        <a href='#portifolio' data-scroll>Portfólio</a>
+        <a href='#contato' class='cta' data-scroll>Contrate</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class='hero'>
+        <div class='hero-left'>
+          <h2 data-editable-id='hero_title'>Tecnologia que transforma negócios.</h2>
+          <p data-editable-id='hero_text'>Desenvolvemos sites, lojas e automações que entregam resultado. Design profissional, performance e integração com ferramentas que você já usa.</p>
+          <div class='buttons'>
+            <button class='btn primary' onclick="location.href='#contato'">Peça um orçamento</button>
+            <button class='btn' onclick="location.href='#portifolio'">Ver portfólio</button>
+          </div>
+
+          <div class='features' style='margin-top:18px'>
+            <div class='feature'>
+              <h4 data-editable-id='feature_1_title'>Sites & Landing Pages <span class='editable-indicator' data-ind='feature_1'></span></h4>
+              <p data-editable-id='feature_1_text'>Rápidos, responsivos e otimizados para conversão.</p>
+            </div>
+            <div class='feature'>
+              <h4 data-editable-id='feature_2_title'>Automação & Integrações</h4>
+              <p data-editable-id='feature_2_text'>Fluxos com CRM, e-mail marketing, pagamentos e APIs.</p>
+            </div>
+            <div class='feature'>
+              <h4 data-editable-id='feature_3_title'>Suporte e Manutenção</h4>
+              <p data-editable-id='feature_3_text'>Suporte contínuo, atualizações e segurança.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class='card'>
+            <h3 style='margin:0 0 8px' data-editable-id='quick_title'>Orçamento rápido</h3>
+            <p style='margin:0 0 12px;color:var(--muted);font-size:14px' data-editable-id='quick_text'>Preencha e a gente entra em contato em até 1 dia útil.</p>
+            <form id='contactForm' onsubmit='sendMail(event)'>
+              <label for='name'>Nome</label>
+              <input id='name' name='name' placeholder='Seu nome' required />
+              <label for='email' style='margin-top:8px'>E-mail</label>
+              <input id='email' name='email' type='email' placeholder='seu@email.com' required />
+              <label for='message' style='margin-top:8px'>Mensagem / Projeto</label>
+              <textarea id='message' name='message' placeholder='Descreva brevemente o projeto' required></textarea>
+              <div style='display:flex;gap:8px;margin-top:10px'>
+                <button class='btn primary' type='submit'>Enviar</button>
+                <a class='whatsapp' id='wa_link' href='https://wa.me/5511999999999?text=Olá%20M.%20Lira!%20Quero%20um%20orçamento' target='_blank'>WhatsApp</a>
+              </div>
+            </form>
+            <p id='sent' style='display:none;margin-top:10px;color:var(--muted);font-size:13px'>Mensagem enviada! Verifique seu e-mail.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id='servicos' style='margin-top:30px'>
+        <h3 style='margin-bottom:10px' data-editable-id='services_title'>Serviços</h3>
+        <div style='display:grid;grid-template-columns:repeat(3,1fr);gap:12px'>
+          <div class='card'>
+            <h4 data-editable-id='svc_1_title'>Desenvolvimento Web</h4>
+            <p class='muted' data-editable-id='svc_1_text'>Sites, lojas e landing pages com CMS ou código puro.</p>
+          </div>
+          <div class='card'>
+            <h4 data-editable-id='svc_2_title'>Marketing Digital</h4>
+            <p class='muted' data-editable-id='svc_2_text'>Campanhas, SEO e estratégias de aquisição.</p>
+          </div>
+          <div class='card'>
+            <h4 data-editable-id='svc_3_title'>Integrações & APIs</h4>
+            <p class='muted' data-editable-id='svc_3_text'>Automação entre sistemas, pagamentos e CRM.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id='portifolio' style='margin-top:26px'>
+        <h3 data-editable-id='portfolio_title'>Portfólio</h3>
+        <div class='portfolio'>
+          <div class='thumb' data-editable-id='thumb_1'>Projeto A</div>
+          <div class='thumb' data-editable-id='thumb_2'>Projeto B</div>
+          <div class='thumb' data-editable-id='thumb_3'>Projeto C</div>
+          <div class='thumb' data-editable-id='thumb_4'>Projeto D</div>
+          <div class='thumb' data-editable-id='thumb_5'>Projeto E</div>
+          <div class='thumb' data-editable-id='thumb_6'>Projeto F</div>
+        </div>
+      </section>
+
+      <section id='contato' style='margin-top:28px'>
+        <h3 data-editable-id='contact_title'>Contato</h3>
+        <div style='display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px;align-items:start'>
+          <div class='card'>
+            <p style='margin:0 0 12px;color:var(--muted)'>Prefere falar direto? Use WhatsApp ou envie um e-mail.</p>
+            <p style='margin:0'><strong>E-mail</strong>: <span data-editable-id='contact_email'>contato@mlira.com.br</span></p>
+            <p style='margin:0'><strong>WhatsApp</strong>: <a id='wa_display' href='https://wa.me/5511999999999' style='color:var(--accent)'>+55 (11) 99999-9999</a></p>
+            <p style='margin-top:12px;color:var(--muted)'>Endereço fiscal: <span data-editable-id='contact_address'>Avenida Exemplo, 123 — São Paulo, SP</span></p>
+          </div>
+
+          <div class='card'>
+            <h4>Formulário</h4>
+            <form onsubmit='sendMail(event)'>
+              <label for='f-name'>Nome</label>
+              <input id='f-name' required />
+              <label for='f-email' style='margin-top:8px'>E-mail</label>
+              <input id='f-email' type='email' required />
+              <label for='f-msg' style='margin-top:8px'>Mensagem</label>
+              <textarea id='f-msg' required></textarea>
+              <div style='margin-top:10px'><button class='btn primary' type='submit'>Enviar</button></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <strong data-editable-id='footer_company'>M. Lira Serviços Digitais LTDA</strong> — Todos os direitos reservados</div>
+      <div style='color:var(--muted)'><span data-editable-id='footer_note'>Feito com ♥ Tecnologia e atenção</span></div>
+    </footer>
+  </div>
+
+  <!-- edit UI -->
+  <div class='edit-toggle' id='editToggle'>
+    <button id='enterEdit'>Entrar em modo edição</button>
+  </div>
+  <div class='editor-panel' id='editorPanel' aria-hidden='true'>
+    <h4>Editor</h4>
+    <div class='editor-row'>
+      <label>Cor principal</label>
+      <div class='editor-controls'><input type='color' id='accentPicker' value='#00a3ff'></div>
+    </div>
+    <div class='editor-row'>
+      <label>Editar local</label>
+      <select id='editSelect' style='flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit'>
+        <option value=''>Selecionar elemento...</option>
+      </select>
+    </div>
+    <div class='editor-row'>
+      <label>Conteúdo</label>
+      <input id='editInput' style='flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit' />
+    </div>
+    <div class='editor-actions'>
+      <button class='small' id='applyBtn'>Aplicar</button>
+      <button class='small' id='saveBtn'>Salvar (local)</button>
+      <button class='small' id='resetBtn'>Resetar</button>
+    </div>
+    <div class='save-info' id='saveInfo'>Nenhuma alteração salva.</div>
+  </div>
+
+  <script>
+    // Helper: save/load state in localStorage
+    const STORAGE_KEY = 'mlira_site_state_v1';
+
+    // collect editable elements
+    const editables = document.querySelectorAll('[data-editable-id]');
+    const editSelect = document.getElementById('editSelect');
+    editables.forEach(el => {
+      const id = el.getAttribute('data-editable-id');
+      const label = id.replace(/_/g, ' ');
+      const opt = document.createElement('option');
+      opt.value = id;
+      opt.textContent = label;
+      editSelect.appendChild(opt);
+    });
+
+    // open editor panel
+    const enterBtn = document.getElementById('enterEdit');
+    const panel = document.getElementById('editorPanel');
+    let inEditMode = false;
+
+    enterBtn.addEventListener('click', () => {
+      inEditMode = !inEditMode;
+      if(inEditMode){
+        panel.style.display='block';
+        panel.setAttribute('aria-hidden','false');
+        enterBtn.textContent = 'Sair do modo edição';
+        // mark editable elements with outline and make contentEditable
+        editables.forEach(el => {
+          el.style.outline='2px dashed rgba(255,255,255,0.04)';
+          el.setAttribute('contenteditable','true');
+        });
+      } else {
+        panel.style.display='none';
+        panel.setAttribute('aria-hidden','true');
+        enterBtn.textContent = 'Entrar em modo edição';
+        editables.forEach(el => {
+          el.style.outline='none';
+          el.removeAttribute('contenteditable');
+        });
+      }
+    });
+
+    // when select changes, load its text into input
+    editSelect.addEventListener('change', () => {
+      const val = editSelect.value;
+      if(!val){ document.getElementById('editInput').value = ''; return; }
+      const el = document.querySelector('[data-editable-id="'+val+'"]');
+      if(el) document.getElementById('editInput').value = el.innerText.trim();
+    });
+
+    // apply button: set innerText of selected element
+    document.getElementById('applyBtn').addEventListener('click', () => {
+      const key = editSelect.value;
+      if(!key) return alert('Selecione um elemento para editar.');
+      const el = document.querySelector('[data-editable-id="'+key+'"]');
+      const val = document.getElementById('editInput').value;
+      if(el) el.innerText = val;
+      updateWhatsAppLink();
+      document.getElementById('saveInfo').textContent = 'Alterações não salvas.';
+    });
+
+    // accent color picker
+    const accentPicker = document.getElementById('accentPicker');
+    accentPicker.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--accent', e.target.value);
+      document.getElementById('saveInfo').textContent = 'Alterações não salvas.';
+    });
+
+    // save to localStorage
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const state = { color: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), content: {} };
+      editables.forEach(el => {
+        state.content[el.getAttribute('data-editable-id')] = el.innerHTML;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      document.getElementById('saveInfo').textContent = 'Alterações salvas localmente.';
+      // small visual feedback
+      document.getElementById('saveBtn').textContent = 'Salvo ✓';
+      setTimeout(()=>document.getElementById('saveBtn').textContent = 'Salvar (local)',1200);
+    });
+
+    // reset to defaults (clear localStorage)
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if(confirm('Resetar o site para o estado original?')){
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    });
+
+    // load saved state on start
+    function loadState(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      try{
+        const state = JSON.parse(raw);
+        if(state.color) document.documentElement.style.setProperty('--accent', state.color);
+        for(const k in state.content){
+          const el = document.querySelector('[data-editable-id="'+k+'"]');
+          if(el) el.innerHTML = state.content[k];
+        }
+        document.getElementById('saveInfo').textContent = 'Carregado estado salvo localmente.';
+      }catch(e){ console.warn('falha ao carregar state',e) }
+    }
+    loadState();
+
+    // update whatsapp link if phone edited
+    function updateWhatsAppLink(){
+      const phone = document.querySelector('[data-editable-id="contact_email"]').innerText.trim();
+      const waText = document.getElementById('wa_display').innerText.replace(/\s|\(|\)|\+|\-/g,'');
+      const digits = waText.match(/\d{8,}$/);
+      if(digits){
+        const number = digits[0];
+        document.getElementById('wa_link').href = 'https://wa.me/55' + number + '?text=Olá%20M.%20Lira!%20Quero%20um%20orçamento';
+        document.getElementById('wa_display').href = 'https://wa.me/55' + number;
+      }
+    }
+
+    // smooth scroll for nav
+    document.querySelectorAll('[data-scroll]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const target = document.querySelector(href);
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // sendMail behavior (mailto)
+    function sendMail(e){
+      e.preventDefault();
+      const name = (document.querySelector('#name')||document.querySelector('#f-name')).value || '';
+      const email = (document.querySelector('#email')||document.querySelector('#f-email')).value || '';
+      const message = (document.querySelector('#message')||document.querySelector('#f-msg')).value || '';
+      const subject = encodeURIComponent('Orçamento — ' + name);
+      const body = encodeURIComponent('Nome: ' + name + '\nEmail: ' + email + '\n\nMensagem:\n' + message);
+      window.location.href = 'mailto:' + (document.querySelector('[data-editable-id="contact_email"]').innerText.trim() || 'contato@mlira.com.br') + '?subject=' + subject + '&body=' + body;
+      const sent = document.getElementById('sent');
+      if(sent){ sent.style.display='block'; setTimeout(()=>sent.style.display='none',4000) }
+      return false;
+    }
+
+    // keyboard shortcut: Ctrl+E to toggle editor
+    document.addEventListener('keydown', (e) => {
+      if(e.ctrlKey && e.key.toLowerCase() === 'e'){ enterBtn.click(); }
+    });
+  </script>
+</body>
+</html>
